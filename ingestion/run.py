@@ -32,6 +32,10 @@ def main():
     clear_directory(processed_dir)
     clear_directory(index_dir)
     
+    os.makedirs(raw_dir, exist_ok=True)
+    os.makedirs(processed_dir, exist_ok=True)
+    os.makedirs(index_dir, exist_ok=True)
+    
     print("\n[1/4] Fetching HTML from URLs...")
     fetch_all()
     
