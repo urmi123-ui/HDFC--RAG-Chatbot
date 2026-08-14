@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+beautifulsoup4
+chromadb
+sentence-transformers
+openai
+apscheduler
+pyyaml
+groq
+

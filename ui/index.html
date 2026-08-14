@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDFC Mutual Fund FAQ — Facts-Only Assistant</title>
+    <meta name="description" content="Facts-only FAQ assistant for HDFC Mutual Fund schemes. Get verified, source-backed answers about expense ratios, exit loads, fund managers, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ─── Design Tokens ─── */
+        :root {
+            --bg:          #070b12;
+            --surface-1:   rgba(12, 18, 30, 0.95);
+            --surface-2:   rgba(18, 27, 44, 0.8);
+            --surface-3:   rgba(26, 38, 58, 0.7);
+            --border:      rgba(56, 85, 130, 0.22);
+            --border-glow: rgba(96, 165, 250, 0.35);
+
+            --text-1: #f0f6ff;
+            --text-2: #94a3b8;
+            --text-3: #4f6a8a;
+
+            --blue-400:  #60a5fa;
+            --blue-500:  #3b82f6;
+            --blue-600:  #2563eb;
+            --cyan-400:  #22d3ee;
+            --teal-400:  #2dd4bf;
+            --green-400: #34d399;
+            --amber-400: #fbbf24;
+            --red-400:   #f87171;
+
+            --glow-blue:  0 0 40px rgba(96, 165, 250, 0.15);
+            --glow-cyan:  0 0 30px rgba(34, 211, 238, 0.12);
+
+            --radius-sm:  8px;
+            --radius-md:  14px;
+            --radius-lg:  20px;
+            --radius-xl:  28px;
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { height: 100%; font-size: 16px; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text-1);
+            height: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ─── Cute Shooting Stars Animation ─── */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 4s infinite ease-in-out;
+        }
+
+        .star.s1 { top: 15%; left: 15%; width: 2px; height: 2px; animation-delay: 0s; }
+        .star.s2 { top: 35%; left: 80%; width: 3px; height: 3px; animation-delay: 1.5s; }
+        .star.s3 { top: 55%; left: 8%; width: 2px; height: 2px; animation-delay: 0.8s; }
+        .star.s4 { top: 75%; left: 90%; width: 3px; height: 3px; animation-delay: 2.2s; }
+        .star.s5 { top: 85%; left: 25%; width: 2px; height: 2px; animation-delay: 1.1s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        .shooting-star {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(-45deg, var(--blue-400), transparent);
+            border-radius: 999px;
+            filter: drop-shadow(0 0 6px rgba(147, 197, 253, 0.4));
+            animation: tail 3s ease-in-out infinite, shooting 3s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        .shooting-star.ss1 {
+            top: 10%;
+            left: 80%;
+            animation-delay: 0.2s;
+            animation-duration: 4.5s;
+        }
+
+        .shooting-star.ss2 {
+            top: 25%;
+            left: 95%;
+            animation-delay: 2.5s;
+            animation-duration: 6s;
+        }
+
+        .shooting-star.ss3 {
+            top: 5%;
+            left: 50%;
+            animation-delay: 4.8s;
+            animation-duration: 5s;
+        }
+
+        @keyframes tail {
+            0% { width: 0; }
+            30% { width: 80px; }
+            100% { width: 0; }
+        }
+
+        @keyframes shooting {
+            0% { transform: translateX(0) translateY(0) rotate(-45deg); }
+            100% { transform: translateX(-400px) translateY(400px) rotate(-45deg); }
+        }
+
+        /* ─── Animated Grid / Aura Background ─── */
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 0%, rgba(37, 99, 235, 0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 80% 100%, rgba(20, 184, 166, 0.12) 0%, transparent 55%),
+                radial-gradient(ellipse 60% 50% at 50% 50%, rgba(96, 165, 250, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed; inset: 0;
+            background-image:
+                linear-gradient(rgba(56, 85, 130, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 85, 130, 0.06) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── Layout Shell ─── */
+        .shell {
+            position: relative; z-index: 1;
+            width: min(1120px, 96vw);
+            height: min(760px, 96vh);
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            grid-template-rows: 1fr;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow:
+                0 0 0 1px rgba(56, 85, 130, 0.12),
+                0 40px 80px rgba(0, 0, 0, 0.6),
+                0 0 120px rgba(37, 99, 235, 0.08);
+            animation: shellIn 0.6s var(--ease-out-expo) both;
+        }
+
+        @keyframes shellIn {
+            from { opacity: 0; transform: translateY(16px) scale(0.99); }
+            to   { opacity: 1; transform: translateY(0)  scale(1); }
+        }
+
+        /* ─── LEFT SIDEBAR ─── */
+        .sidebar {
+            background: var(--surface-1);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            min-height: 0;
+        }
+
+        .sidebar-top {
+            padding: 28px 24px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .brand-icon {
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, var(--blue-500), var(--cyan-400));
+            border-radius: 10px;
+            display: grid; place-items: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .brand-icon svg { width: 20px; height: 20px; color: white; }
+
+        .brand-text h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            color: var(--text-1);
+            line-height: 1.2;
+        }
+
+        .brand-text p {
+            font-size: 0.68rem;
+            font-weight: 400;
+            color: var(--text-3);
+            margin-top: 2px;
+            letter-spacing: 0.3px;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(52, 211, 153, 0.08);
+            border: 1px solid rgba(52, 211, 153, 0.22);
+            border-radius: 999px;
+            padding: 5px 11px 5px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--green-400);
+            letter-spacing: 0.3px;
+            width: max-content;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px;
+            background: var(--green-400);
+            border-radius: 50%;
+            box-shadow: 0 0 6px var(--green-400);
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* ─── Sidebar Sections ─── */
+        .sidebar-section {
+            padding: 20px 24px;
+        }
+
+        /* ─── Sidebar Scheme Rows ─── */
+        .scheme-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-top: 8px;
+        }
+
+        .scheme-row {
+            font-size: 0.75rem;
+            color: var(--text-2);
+            padding: 7px 10px;
+            border-radius: 8px;
+            cursor: default;
+            transition: background 0.15s ease, color 0.15s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            line-height: 1.3;
+        }
+
+        .scheme-row::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--blue-400);
+            border-radius: 50%;
+            flex-shrink: 0;
+            opacity: 0.6;
+        }
+
+        .scheme-row:hover {
+            background: rgba(96, 165, 250, 0.06);
+            color: var(--text-1);
+        }
+
+        .scheme-row:hover::before {
+            opacity: 1;
+        }
+
+        .sidebar-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 12px;
+        }
+
+        .suggestion-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .suggestion-btn {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: var(--radius-md);
+            padding: 10px 12px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.18s ease;
+            width: 100%;
+        }
+
+        .suggestion-btn:hover {
+            background: var(--surface-3);
+            border-color: var(--border);
+        }
+
+        .suggestion-icon {
+            width: 28px; height: 28px;
+            border-radius: 8px;
+            display: grid; place-items: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .suggestion-icon.blue  { background: rgba(59, 130, 246, 0.15); color: var(--blue-400); }
+        .suggestion-icon.teal  { background: rgba(45, 212, 191, 0.12); color: var(--teal-400); }
+        .suggestion-icon.amber { background: rgba(251, 191, 36, 0.12);  color: var(--amber-400); }
+
+        .suggestion-icon svg { width: 14px; height: 14px; }
+
+        .suggestion-text {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .suggestion-tag {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+
+        .suggestion-q {
+            font-size: 0.775rem;
+            line-height: 1.4;
+            color: var(--text-2);
+            font-weight: 400;
+        }
+
+        /* ─── Welcome Suggestions Grid ─── */
+        .welcome-suggestions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            width: 100%;
+            max-width: 760px;
+            margin-top: 20px;
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.22s var(--ease-out-expo);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .welcome-card:hover {
+            background: rgba(59, 130, 246, 0.07);
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+            box-shadow: var(--glow-blue);
+        }
+
+        .welcome-card-tag {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.9px;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+
+        .welcome-card:hover .welcome-card-tag {
+            color: var(--blue-400);
+        }
+
+        .welcome-card-q {
+            font-size: 0.78rem;
+            line-height: 1.4;
+            color: var(--text-1);
+            font-weight: 400;
+        }
+
+        /* ─── MAIN CHAT PANEL ─── */
+        .main-panel {
+            display: flex;
+            flex-direction: column;
+            background: var(--surface-2);
+            min-width: 0;
+            height: 100%;
+            min-height: 0;
+        }
+
+        /* ─── Top bar ─── */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(7, 11, 18, 0.5);
+            backdrop-filter: blur(8px);
+            flex-shrink: 0;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topbar-left h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-1);
+        }
+
+        .topbar-left p {
+            font-size: 0.7rem;
+            color: var(--text-3);
+        }
+
+        .disclaimer-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(248, 113, 113, 0.08);
+            border: 1px solid rgba(248, 113, 113, 0.2);
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 0.67rem;
+            font-weight: 600;
+            color: var(--red-400);
+            letter-spacing: 0.3px;
+        }
+
+        .disclaimer-tag svg { width: 11px; height: 11px; }
+
+        /* ─── Chat Body ─── */
+        .chat-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            scroll-behavior: smooth;
+        }
+
+        /* ─── Welcome Screen ─── */
+        .welcome {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: auto;
+            max-width: 760px;
+            width: 100%;
+            padding: 16px 24px;
+            animation: fadeUp 0.5s var(--ease-out-expo) both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-icon {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(34, 211, 238, 0.12));
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            border-radius: 14px;
+            display: grid; place-items: center;
+            margin-bottom: 14px;
+            box-shadow: var(--glow-blue);
+        }
+
+        .welcome-icon svg { width: 22px; height: 22px; color: var(--blue-400); }
+
+        .welcome h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-1);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .welcome p {
+            font-size: 0.8rem;
+            color: var(--text-2);
+            line-height: 1.6;
+            max-width: 500px;
+        }
+
+        /* ─── Message Bubbles ─── */
+        .message-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            animation: msgIn 0.25s var(--ease-out-expo) both;
+        }
+
+        @keyframes msgIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-group.user  { align-items: flex-end;   margin-top: 10px; }
+        .message-group.bot   { align-items: flex-start;  margin-top: 10px; }
+
+        .msg-row { display: flex; align-items: flex-end; gap: 8px; }
+
+        .avatar {
+            width: 28px; height: 28px;
+            border-radius: 8px;
+            display: grid; place-items: center;
+            flex-shrink: 0;
+        }
+
+        .avatar.bot-av {
+            background: linear-gradient(135deg, var(--blue-600), var(--cyan-400));
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+        }
+
+        .avatar svg { width: 14px; height: 14px; color: white; }
+
+        .bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.875rem;
+            line-height: 1.65;
+            max-width: 520px;
+        }
+
+        .bubble.user-bubble {
+            background: linear-gradient(135deg, var(--blue-600) 0%, #1e40af 100%);
+            color: #fff;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
+        }
+
+        .bubble.bot-bubble {
+            background: var(--surface-1);
+            color: var(--text-1);
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+        }
+
+        /* ─── Bot Footer (citation + date) ─── */
+        .msg-footer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 6px;
+            padding-left: 36px;
+            flex-wrap: wrap;
+        }
+
+        .citation-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(34, 211, 238, 0.07);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 999px;
+            padding: 3px 10px 3px 7px;
+            font-size: 0.67rem;
+            font-weight: 600;
+            color: var(--cyan-400);
+            text-decoration: none;
+            letter-spacing: 0.2px;
+            transition: background 0.15s ease;
+        }
+
+        .citation-chip:hover { background: rgba(34, 211, 238, 0.14); }
+        .citation-chip svg   { width: 10px; height: 10px; }
+
+        .last-updated {
+            font-size: 0.65rem;
+            color: var(--text-3);
+            font-weight: 500;
+        }
+
+        /* ─── Typing Indicator ─── */
+        .typing-bubble {
+            background: var(--surface-1);
+            border: 1px solid var(--border);
+            padding: 14px 18px;
+            border-radius: 18px;
+            border-bottom-left-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--text-3);
+            animation: bounce 1.1s ease-in-out infinite;
+        }
+        .dot:nth-child(2) { animation-delay: 0.18s; }
+        .dot:nth-child(3) { animation-delay: 0.36s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: translateY(0); }
+            40%            { transform: translateY(-5px); }
+        }
+
+        /* ─── Input Area ─── */
+        .input-area {
+            flex-shrink: 0;
+            padding: 16px 24px 20px;
+            background: rgba(7, 11, 18, 0.5);
+            border-top: 1px solid var(--border);
+            backdrop-filter: blur(8px);
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface-1);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 6px 6px 6px 18px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .input-row:focus-within {
+            border-color: var(--border-glow);
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+        }
+
+        .input-row input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            color: var(--text-1);
+            padding: 8px 0;
+        }
+
+        .input-row input::placeholder { color: var(--text-3); }
+
+        .send-btn {
+            background: linear-gradient(135deg, var(--blue-500), var(--blue-600));
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.83rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.18s ease;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+            flex-shrink: 0;
+        }
+
+        .send-btn:hover {
+            background: linear-gradient(135deg, var(--blue-400), var(--blue-500));
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .send-btn:active { transform: translateY(0); }
+        .send-btn svg { width: 14px; height: 14px; }
+
+        .input-hint {
+            font-size: 0.67rem;
+            color: var(--text-3);
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* ─── Custom Scrollbar ─── */
+        .chat-area::-webkit-scrollbar { width: 5px; }
+        .chat-area::-webkit-scrollbar-track { background: transparent; }
+        .chat-area::-webkit-scrollbar-thumb { background: rgba(56, 85, 130, 0.3); border-radius: 99px; }
+        .chat-area::-webkit-scrollbar-thumb:hover { background: rgba(96, 165, 250, 0.35); }
+
+        /* ─── Divider / timestamp ─── */
+        .date-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 8px 0;
+            color: var(--text-3);
+            font-size: 0.67rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .date-divider::before, .date-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+    </style>
+</head>
+<body>
+
+<div class="stars-container">
+    <div class="star s1"></div>
+    <div class="star s2"></div>
+    <div class="star s3"></div>
+    <div class="star s4"></div>
+    <div class="star s5"></div>
+    <div class="shooting-star ss1"></div>
+    <div class="shooting-star ss2"></div>
+    <div class="shooting-star ss3"></div>
+</div>
+
+<div class="shell">
+    <!-- ─── SIDEBAR ─── -->
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>HDFC MF Assistant</h1>
+                    <p>Facts-Only FAQ Engine</p>
+                </div>
+            </div>
+            <div class="status-pill">
+                <div class="status-dot"></div>
+                12 Schemes Indexed
+            </div>
+        </div>
+
+        <!-- Supported Schemes Clean Static List -->
+        <div class="sidebar-section" style="flex:1; overflow-y: auto; padding-top: 16px; padding-bottom: 24px;">
+            <div class="sidebar-label">Supported Schemes</div>
+            <div class="scheme-rows">
+                <div class="scheme-row">HDFC Mid Cap Fund</div>
+                <div class="scheme-row">HDFC Small Cap Fund</div>
+                <div class="scheme-row">HDFC Defence Fund</div>
+                <div class="scheme-row">HDFC NIFTY 50 Index Fund</div>
+                <div class="scheme-row">HDFC Balanced Advantage Fund</div>
+                <div class="scheme-row">HDFC Gold ETF Fund of Fund</div>
+                <div class="scheme-row">HDFC Pharma &amp; Healthcare Fund</div>
+                <div class="scheme-row">HDFC Equity Fund (Flexi Cap)</div>
+                <div class="scheme-row">HDFC Silver ETF FoF</div>
+                <div class="scheme-row">HDFC Short Term Opp Fund</div>
+                <div class="scheme-row">HDFC Focused Fund</div>
+                <div class="scheme-row">HDFC Multi Cap Fund</div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ─── MAIN PANEL ─── -->
+    <main class="main-panel">
+        <!-- Top Bar -->
+        <div class="topbar">
+            <div class="topbar-left">
+                <svg width="18" height="18" fill="none" stroke="var(--blue-400)" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                </svg>
+                <div>
+                    <h2>FAQ Assistant</h2>
+                    <p>Powered by Groq · Llama 3.3-70B · ChromaDB</p>
+                </div>
+            </div>
+            <div class="disclaimer-tag">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                Facts-only · No investment advice
+            </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-area" id="chat-area">
+            <!-- Welcome -->
+            <div class="welcome" id="welcome-view">
+                <div class="welcome-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h2>How can I help you today?</h2>
+                <p>Ask any factual question about HDFC Mutual Fund schemes — expense ratios, exit loads, fund managers, benchmarks, and more. Select a suggestion below or type your query.</p>
+                
+                <div class="welcome-suggestions">
+                    <div class="welcome-card" onclick="askSuggestion('What is the expense ratio of HDFC Mid Cap Fund Direct Growth?')">
+                        <span class="welcome-card-tag" style="color: var(--blue-400);">Expense Ratio</span>
+                        <span class="welcome-card-q">What is the expense ratio of HDFC Mid Cap Fund?</span>
+                    </div>
+                    
+                    <div class="welcome-card" onclick="askSuggestion('What is the exit load on HDFC Defence Fund Direct Growth?')">
+                        <span class="welcome-card-tag" style="color: var(--teal-400);">Exit Load</span>
+                        <span class="welcome-card-q">What is the exit load on HDFC Defence Fund?</span>
+                    </div>
+                    
+                    <div class="welcome-card" onclick="askSuggestion('Who manages HDFC Gold ETF Fund of Fund Direct Plan Growth?')">
+                        <span class="welcome-card-tag" style="color: var(--amber-400);">Fund Manager</span>
+                        <span class="welcome-card-q">Who manages HDFC Gold ETF Fund of Fund?</span>
+                    </div>
+
+                    <div class="welcome-card" onclick="askSuggestion('What is the minimum SIP amount for HDFC Small Cap Fund Direct Growth?')">
+                        <span class="welcome-card-tag" style="color: var(--blue-400);">Min. Investment</span>
+                        <span class="welcome-card-q">Minimum SIP amount for HDFC Small Cap Fund?</span>
+                    </div>
+
+                    <div class="welcome-card" onclick="askSuggestion('What is the benchmark index of HDFC Nifty 50 Index Fund Direct Growth?')">
+                        <span class="welcome-card-tag" style="color: var(--teal-400);">Benchmark</span>
+                        <span class="welcome-card-q">Benchmark index of HDFC Nifty 50 Index Fund?</span>
+                    </div>
+
+                    <div class="welcome-card" onclick="askSuggestion('What is the investment objective of HDFC Pharma and Healthcare Fund Direct Growth?')">
+                        <span class="welcome-card-tag" style="color: var(--amber-400);">Objective</span>
+                        <span class="welcome-card-q">What is the investment objective of HDFC Pharma?</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <form id="chat-form" onsubmit="handleQuery(event)">
+                <div class="input-row">
+                    <svg width="16" height="16" fill="none" stroke="var(--text-3)" viewBox="0 0 24 24" style="flex-shrink:0;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input id="query-input" type="text" placeholder="Ask a factual question about HDFC mutual funds…" autocomplete="off">
+                    <button type="submit" class="send-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                        Ask
+                    </button>
+                </div>
+            </form>
+            <div class="input-hint">Facts-only · Answers sourced from 12 official HDFC Groww scheme pages</div>
+        </div>
+    </main>
+</div>
+
+<script>
+    const chatArea    = document.getElementById('chat-area');
+    const welcomeView = document.getElementById('welcome-view');
+    const queryInput  = document.getElementById('query-input');
+    let   firstMsg    = true;
+
+    function scrollToBottom() {
+        chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    function formatTimestamp(ts) {
+        if (!ts) return '';
+        try {
+            const d = new Date(parseInt(ts) * 1000);
+            return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        } catch { return ts; }
+    }
+
+    function askSuggestion(q) {
+        queryInput.value = q;
+        document.getElementById('chat-form').requestSubmit();
+    }
+
+    async function handleQuery(e) {
+        e.preventDefault();
+        const text = queryInput.value.trim();
+        if (!text) return;
+
+        if (firstMsg) {
+            welcomeView.style.display = 'none';
+            // Date divider
+            const div = document.createElement('div');
+            div.className = 'date-divider';
+            div.textContent = new Date().toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+            chatArea.appendChild(div);
+            firstMsg = false;
+        }
+
+        appendUser(text);
+        queryInput.value = '';
+        scrollToBottom();
+
+        const loadId = appendLoading();
+        scrollToBottom();
+
+        try {
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text })
+            });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const data = await res.json();
+            removeLoading(loadId);
+            appendBot(data.answer, data.citation_url, data.last_updated);
+        } catch (err) {
+            removeLoading(loadId);
+            appendBot('⚠️ Failed to reach the API. Please ensure the server is running and your GROQ_API_KEY is configured in .env.', '', '');
+        }
+        scrollToBottom();
+    }
+
+    function appendUser(text) {
+        const g = document.createElement('div');
+        g.className = 'message-group user';
+        g.innerHTML = `
+            <div class="msg-row">
+                <div class="bubble user-bubble">${escHtml(text)}</div>
+            </div>`;
+        chatArea.appendChild(g);
+    }
+
+    function appendBot(text, citationUrl, lastUpdated) {
+        const g = document.createElement('div');
+        g.className = 'message-group bot';
+
+        const isRefusal = citationUrl && (citationUrl.includes('amfiindia.com') || citationUrl.includes('hdfcfund.com'));
+        const chipLabel = citationUrl
+            ? (isRefusal ? '↗ Compliance Resources' : '↗ Source Citation')
+            : null;
+
+        const chipHtml = citationUrl
+            ? `<a href="${escAttr(citationUrl)}" target="_blank" rel="noopener noreferrer" class="citation-chip">
+                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                   </svg>
+                   ${escHtml(chipLabel)}
+               </a>` : '';
+
+        const dateHtml = lastUpdated
+            ? `<span class="last-updated">Last updated: ${escHtml(formatTimestamp(lastUpdated))}</span>` : '';
+
+        const footerHtml = (citationUrl || lastUpdated)
+            ? `<div class="msg-footer">${chipHtml}${dateHtml}</div>` : '';
+
+        g.innerHTML = `
+            <div class="msg-row">
+                <div class="avatar bot-av">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+                    </svg>
+                </div>
+                <div class="bubble bot-bubble">${escHtml(text)}</div>
+            </div>
+            ${footerHtml}`;
+        chatArea.appendChild(g);
+    }
+
+    function appendLoading() {
+        const id = 'ld_' + Math.random().toString(36).slice(2);
+        const g  = document.createElement('div');
+        g.className = 'message-group bot';
+        g.id = id;
+        g.innerHTML = `
+            <div class="msg-row">
+                <div class="avatar bot-av">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+                    </svg>
+                </div>
+                <div class="typing-bubble">
+                    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                </div>
+            </div>`;
+        chatArea.appendChild(g);
+        return id;
+    }
+
+    function removeLoading(id) {
+        const el = document.getElementById(id);
+        if (el) el.remove();
+    }
+
+    function escHtml(s) {
+        return String(s ?? '')
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+            .replace(/'/g,'&#39;');
+    }
+
+    function escAttr(s) { return escHtml(s); }
+
+    function toggleScheme(id) {
+        const item = document.getElementById(id);
+        const isActive = item.classList.contains('active');
+        
+        // Collapse all others
+        document.querySelectorAll('.scheme-item').forEach(el => {
+            el.classList.remove('active');
+        });
+        
+        if (!isActive) {
+            item.classList.add('active');
+        }
+    }
+</script>
+</body>
+</html>
